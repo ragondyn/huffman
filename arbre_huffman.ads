@@ -1,12 +1,18 @@
 with Ada.Unchecked_Deallocation;
+with Ada.Integer_Text_IO;
+use Ada.Integer_Text_IO;
+with Liste;
 
 package Arbre_Huffman is
-	--stockage des frequences
+
+        
+        
+        --stockage des frequences
 	type Tableau_Ascii is array(Character) of Natural;
 	--un bit
 	subtype ChiffreBinaire is Integer range 0..1 ;
-	--arbre
-	type Arbre is private;
+        --arbre
+        type Arbre is private;
 
 	function Calcul_Arbre(Frequences : in Tableau_Ascii) return Arbre;
 	procedure Affiche_Arbre(A: Arbre);
@@ -20,7 +26,7 @@ package Arbre_Huffman is
 	type Dico is array(Character) of Code;
 	--stocke le code de chaque caractere
 	function Calcul_Dictionnaire(A : Arbre) return Dico;
-
+        procedure Put_ChiffreBinaire(C:in ChiffreBinaire);
 	generic
 		with function Octet_Suivant return Character;
 		--decodage_code prend un reste d'octet non decode
@@ -31,6 +37,7 @@ package Arbre_Huffman is
 		procedure Decodage_Code(Reste : in out Code;
 			Arbre_Huffman : Arbre;
 			Caractere : out Character);
+
 private
 	type Noeud;
 	type Arbre is access Noeud;

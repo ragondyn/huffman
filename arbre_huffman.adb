@@ -1,12 +1,17 @@
 with Ada.Text_IO, Comparaisons, File_Priorite;
 use Ada.Text_IO, Comparaisons;
+with Ada.Integer_Text_IO;
 
 package body Arbre_Huffman is
-
+        
 	package Ma_File is new File_Priorite(Natural, Compare, Arbre);
 	use Ma_File;
 
-	type TabFils is array(ChiffreBinaire) of Arbre ;
+         package Package_Liste_ChiffreBinaire is new Liste(ChiffreBinaire, "<", Put_ChiffreBinaire);
+        use Package_Liste_ChiffreBinaire;
+            type Liste_ChiffreBinaire is new Package_Liste_ChiffreBinaire.Liste;
+	
+        type TabFils is array(ChiffreBinaire) of Arbre ;
 
 	type Noeud(EstFeuille: Boolean) is record
 		case EstFeuille is
@@ -16,23 +21,87 @@ package body Arbre_Huffman is
 				-- on a: Fils(0) /= null and Fils(1) /= null
 		end case ;
 	end record;
-
+        procedure Put_ChiffreBinaire(C: in ChiffreBinaire) is
+        begin
+        Put(C);
+        end;
 	procedure Affiche_Arbre(A: Arbre) is
-	begin
-		null; -- TODO
+        begin
+                if A.EstFeuille then
+                Put(A.Char);
+                Put(" ");
+                else
+                Affiche_Arbre(A.Fils(0));
+                Affiche_Arbre(A.Fils(1));
+                end if;
 	end Affiche_Arbre;
 
 	--algo principal : calcul l'arbre a partir des frequences
 	function Calcul_Arbre(Frequences : in Tableau_Ascii) return Arbre is
 		A : Arbre;
+                P1,P2 : Natural;
+                Non_Vide: Boolean:=true;
+                File:Ma_File.File:=Nouvelle_File(Frequences'Length);
 	begin
-		return A; -- TODO
+                for i in Frequences'first..Frequences'last loop
+                        declare
+                        B: Arbre := new Noeud(True);
+                        begin
+                        B.Char:=i;
+                        Insertion(File,Frequences(i),B);
+                        end;
+                end loop;
+
+                while (Non_Vide) loop --la liste est initialement non vide
+                declare 
+                A1,A2:Arbre(False);
+                Filsb:TabFils;
+                begin
+                Meilleur(File,P1,A1,Non_Vide);
+                Suppression(File);
+                Meilleur(File,P2,A2,Non_Vide);
+                if Non_vide then
+                     Suppression(File);
+                     Filsb(0):=A1;
+                     Filsb(1):=A2;
+                     A1.Fils:=Filsb;
+                     Insertion(File,P1+P2,A1);
+                else
+                Non_Vide:=False;
+                A:=A1;
+                end if;
+                end;
+                end loop;
+		return A; 
 	end Calcul_Arbre;
 
 	function Calcul_Dictionnaire(A : Arbre) return Dico is
 		D : Dico;
-	begin
-		-- TODO
+                L : Liste_ChiffreBinaire; --(Vide?)
+                procedure calculbis(A: in Arbre;L: in out Liste_ChiffreBinaire;D: in out Dico) is
+                e: ChiffreBinaire;
+                begin
+                if(not A.EstFeuille) then
+                       Insertion_Tete(0,L);
+                       calculbis(A.Fils(0),L,D);
+                       Supprime_Tete(e,L);
+                       Insertion_Tete(1,L);
+                       calculbis(A.Fils(1),L,D);
+                else
+                        declare
+                        C:Code := new TabBits(1..Taille(L));
+                        Lbis:Liste_ChiffreBinaire:=L;
+                        begin
+                        for i in reverse 1..Taille(L) loop
+                                C.all(i):=(Valeur(Lbis));
+                                Lbis:=Suivant(L);
+                        end loop;
+                        D(A.Char):=c;
+                        end; --??
+                        end if;
+                end calculbis;
+                begin
+                calculbis(A,L,D);
 		return D;
 	end;
 

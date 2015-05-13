@@ -1,30 +1,34 @@
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 package body Liste is
+
 procedure Insertion_Tete(X: in Element; L: in out Liste) is
 Courant: Liste;
 begin
 if TeteLibre /= null then
-TeteLibre.all.Val := X;
+TeteLibre.Val := X;
 Courant := TeteLibre.Suiv;
 TeteLibre.Suiv := L;
+L := TeteLibre;
 TeteLibre := Courant;
 else
 L := new Cellule'(X,L);
 end if;
-end;
+end Insertion_Tete;
+
+
 procedure Supprime_Tete(X: out Element; L: in out Liste) is
 Courant: Liste;
 begin
-if L /= null then
+--if L /= null then
 X := L.Val;
 Courant := L;
 L := L.Suiv;
 Courant.Suiv := TeteLibre;
 TeteLibre := Courant;
-else
-raise Erreur_Liste_Vide;
-end if;
+--else
+--raise Erreur_Liste_Vide;
+--end if;
 end;
 procedure Vider_Liste(L: in out Liste) is
 X: Element;
@@ -128,8 +132,8 @@ end;
 function Valeur(L: Liste) return element is
 begin
 return L.Val;
-exception
-when others => raise Erreur_Liste_Vide;
+--exception
+--when others => raise Erreur_Liste_Vide;
 end Valeur;
 
 procedure copie(A: in Liste; B: out Liste) is

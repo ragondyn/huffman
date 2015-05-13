@@ -21,6 +21,7 @@ X := L.Val;
 Courant := L;
 L := L.Suiv;
 Courant.Suiv := TeteLibre;
+TeteLibre := Courant;
 else
 raise Erreur_Liste_Vide;
 end if;
@@ -147,4 +148,26 @@ if (A /= null) then
         Put(A.Suiv);
 end if;
 end;
+
+procedure Supprime_Queue(X: out Element; L: in out Liste) is
+A: Liste := L.Suiv;
+B: Liste := L;
+begin
+        if L.Suiv /= Liste_Vide then
+        while A.Suiv/=Liste_Vide loop
+                A := A.Suiv;
+                B := B.Suiv;
+                end loop;
+        B.Suiv := null;
+        X := A.Val;
+        A.Suiv := TeteLibre;
+        TeteLibre := A;
+        else
+        X := L.Val;
+        L.Suiv := TeteLibre;
+        TeteLibre := L;
+        L := null;
+        end if;
+        end;
+
 end Liste;

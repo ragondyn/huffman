@@ -15,19 +15,20 @@ package Arbre_Huffman is
         type Arbre is private;
 
 	function Calcul_Arbre(Frequences : in Tableau_Ascii) return Arbre;
-	procedure Affiche_Arbre(A: Arbre);
+	procedure Affiche_Arbre(A: Arbre; H: in Integer);
 
 	--un code binaire
 	type TabBits is array(Positive range <>) of ChiffreBinaire ;
 	type Code is access TabBits;
 	procedure Liberer is new Ada.Unchecked_Deallocation(TabBits, Code);
-
+        
 	--dictionnaire des codes
 	type Dico is array(Character) of Code;
 	--stocke le code de chaque caractere
 	function Calcul_Dictionnaire(A : Arbre) return Dico;
         procedure Put_ChiffreBinaire(C:in ChiffreBinaire);
-	generic
+	procedure Put(C: in Code); 
+        generic
 		with function Octet_Suivant return Character;
 		--decodage_code prend un reste d'octet non decode
 		--un arbre

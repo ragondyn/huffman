@@ -4,6 +4,7 @@ with Ada.Integer_Text_IO;
 
 package body Arbre_Huffman is
         
+        
 	package Ma_File is new File_Priorite(Natural, Compare, Arbre);
 	use Ma_File;
 
@@ -25,14 +26,16 @@ package body Arbre_Huffman is
         begin
         Put(C);
         end;
-	procedure Affiche_Arbre(A: Arbre) is
+	procedure Affiche_Arbre(A: Arbre; H: in Integer) is
         begin
                 if A.EstFeuille then
+                if (A.Char in 'a'..'z') then
                 Put(A.Char);
-                Put(" ");
+                Put(H);
+                end if;
                 else
-                Affiche_Arbre(A.Fils(0));
-                Affiche_Arbre(A.Fils(1));
+                Affiche_Arbre(A.Fils(0),H+1);
+                Affiche_Arbre(A.Fils(1),H+1);
                 end if;
 	end Affiche_Arbre;
 
@@ -54,8 +57,9 @@ package body Arbre_Huffman is
 
                 while (Non_Vide) loop --la liste est initialement non vide
                 declare 
-                A1,A2:Arbre(False);
+                A1,A2:Arbre;
                 Filsb:TabFils;
+                A3:Arbre;
                 begin
                 Meilleur(File,P1,A1,Non_Vide);
                 Suppression(File);
@@ -64,8 +68,8 @@ package body Arbre_Huffman is
                      Suppression(File);
                      Filsb(0):=A1;
                      Filsb(1):=A2;
-                     A1.Fils:=Filsb;
-                     Insertion(File,P1+P2,A1);
+                     A3 := new Noeud'(False,Filsb); 
+                     Insertion(File,P1+P2,A3);
                 else
                 Non_Vide:=False;
                 A:=A1;
@@ -77,27 +81,28 @@ package body Arbre_Huffman is
 
 	function Calcul_Dictionnaire(A : Arbre) return Dico is
 		D : Dico;
-                L : Liste_ChiffreBinaire; --(Vide?)
+                L : Liste_ChiffreBinaire := Liste_Vide ;
                 procedure calculbis(A: in Arbre;L: in out Liste_ChiffreBinaire;D: in out Dico) is
                 e: ChiffreBinaire;
                 begin
                 if(not A.EstFeuille) then
-                       Insertion_Tete(0,L);
+                       Insertion_Queue(0,L);
                        calculbis(A.Fils(0),L,D);
-                       Supprime_Tete(e,L);
-                       Insertion_Tete(1,L);
+                       Supprime_Queue(e,L);
+                       Insertion_Queue(1,L);
                        calculbis(A.Fils(1),L,D);
+                       Supprime_Queue(e,L);
                 else
                         declare
                         C:Code := new TabBits(1..Taille(L));
-                        Lbis:Liste_ChiffreBinaire:=L;
+                        Lbis:Liste_ChiffreBinaire := L;
                         begin
-                        for i in reverse 1..Taille(L) loop
+                        for i in 1..Taille(L) loop
                                 C.all(i):=(Valeur(Lbis));
-                                Lbis:=Suivant(L);
+                                Lbis:=Suivant(Lbis);
                         end loop;
-                        D(A.Char):=c;
-                        end; --??
+                        D(A.Char) := C;
+                        end; 
                         end if;
                 end calculbis;
                 begin
@@ -145,4 +150,12 @@ package body Arbre_Huffman is
 		Caractere := Position_Courante.Char;
 	end;
 
+        procedure Put(C:in Code) is
+        A: Integer:=0;
+        begin
+                for i in C.all'first..C.all'last loop
+                        A:=A*10+C.all(i); 
+                end loop;
+                Put(A);
+        end;
 end;

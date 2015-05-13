@@ -20,6 +20,7 @@ procedure Insertion_Queue(X: in Element; L: in out Liste);
 --Ok
 procedure Supprime_Tete(X: out Element; L: in out Liste);
 --Ok
+procedure Supprime_Queue(X: out Element; L: in out Liste);
 procedure Vider_Liste(L: in out Liste);
 --A tester
 function Suivant(L: Liste)return Liste;

@@ -117,13 +117,27 @@ procedure Huffman is
 		Reste : Code;
 		Caractere_Sortie : Character;
 		D : Dico;
+                x: Character:='a';
 	begin
 		Lecture_Frequences(Fichier_Entree, Frequences, Taille);
 		Affiche_Frequences(Frequences);
 		Arbre_Huffman := Calcul_Arbre(Frequences);
-		Affiche_Arbre(Arbre_Huffman);
-		D := Calcul_Dictionnaire(Arbre_Huffman);
-		Create(Sortie, Out_File, Fichier_Sortie);
+		Put("Arbre:");
+                New_Line;
+                Affiche_Arbre(Arbre_Huffman,0);
+		New_Line;
+                Put("Fin_Arbre");
+                D := Calcul_Dictionnaire(Arbre_Huffman);
+		Put("Dictionnaire");
+                New_Line;
+                while (x in 'a'..'z') loop
+                Put(x);
+                Put(" ");
+                Put(D(x));
+                New_Line;
+                x := Character'succ(x);
+                end loop;
+                Create(Sortie, Out_File, Fichier_Sortie);
 		SAcces := Stream( Sortie );
 		Natural'Output(Sacces, Taille);
 		Tableau_Ascii'Output(Sacces,Frequences) ;

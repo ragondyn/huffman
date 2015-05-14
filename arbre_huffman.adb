@@ -209,7 +209,12 @@ package body Arbre_Huffman is
 
         procedure Encryptage_Arbre(A: in Arbre; C: out Code) is
         
+	--Prend l'arbre A, et retourne le code binaire à rentrer en tête de fichier
+	--On utilise pour cela une fonction recursive Encryptagebis, qui génère ce code en liste
+	--le programme principale ne fait essentiellement que la conversion Liste_ChiffreBinaire-Code
+
         procedure Ajout_Char(K:in Character; C: in out Liste_ChiffreBinaire) is 
+	--Prend un char et un liste_ChiffreBinaire, et fait L := L@[CodeAscii_de_K]
         A : Integer := Character'Pos(K);
         L : Liste_ChiffreBinaire := Liste_Vide;
         begin
@@ -224,12 +229,18 @@ package body Arbre_Huffman is
         end;
         
         procedure Encryptagebis(A: in Arbre; C: in out Liste_ChiffreBinaire) is
+	--Fonction récursive d'encryptage
                 begin
                 if A.EstFeuille then
+		-- si c'est une feuille
                         Insertion_Queue(1,C);
+			--On met 1 en fin de liste
                         Ajout_Char(A.Char,C);
+			--On met l'octet correspondant au code ascii de A.Char en fin de liste
                 else
+		-- si c'est un Noeud, on insère 0
                         Insertion_Queue(0,C);
+			--On rééfectue l'opération à gauche, et à droite
                         Encryptagebis(A.Fils(0),C);
                         Encryptagebis(A.Fils(1),C);
                 end if;
@@ -240,6 +251,7 @@ package body Arbre_Huffman is
 
         begin
            Encryptagebis(A,L);
+	   --On convertie L en C: Code
            C := new TabBits(1..Taille(L));
            for i in C.all'range loop
                 Supprime_Tete(T,L);
@@ -272,7 +284,7 @@ package body Arbre_Huffman is
 		--On crée la feuille associé
                 A := new Noeud'(True,K);
         else
-		--Si ce n'est pas une feuille, on crée un noeud, et recommence
+		--Si ce n'est pas une feuille, on crée un noeud, et on recommence sur le fils gauche, et fils droit
                 A := new Noeud'(False, Fils);
                 DecryptBis(ResteB,A.Fils(0));
                 DecryptBis(ResteB,A.Fils(1));

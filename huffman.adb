@@ -115,37 +115,68 @@ procedure Huffman is
 		Entree, Sortie: Ada.Streams.Stream_IO.File_Type;
 		EAcces, SAcces : Stream_Access;
 		Reste : Code;
-		Caractere_Sortie : Character;
+		ResteB : Code;
+                Caractere_Sortie : Character;
 		D : Dico;
+                Val : Integer := 0;
+                J: Integer := 1;
                 x: Character:='a';
 	begin
 		Lecture_Frequences(Fichier_Entree, Frequences, Taille);
 		Affiche_Frequences(Frequences);
 		Arbre_Huffman := Calcul_Arbre(Frequences);
-		Put("Arbre:");
+		--Affichage de l'Arbre
+                Put("Arbre:");
                 New_Line;
                 Affiche_Arbre(Arbre_Huffman,0);
 		New_Line;
                 Put("Fin_Arbre");
                 D := Calcul_Dictionnaire(Arbre_Huffman);
-		Put("Dictionnaire");
-                New_Line;
-                while (x in 'a'..'z') loop
-                Put(x);
-                Put(" ");
-                Put(D(x));
-                New_Line;
-                x := Character'succ(x);
-                end loop;
+		
+                --Affichage du dictionnaire
+                --Put("Dictionnaire");
+                --New_Line;
+                --while (x in 'a'..'z') loop
+                --Put(x);
+                --Put(" ");
+                --Put(D(x));
+                --New_Line;
+                --x := Character'succ(x);
+                --end loop;
+                
+                --Création du fichier de sortie 
                 Create(Sortie, Out_File, Fichier_Sortie);
 		SAcces := Stream( Sortie );
 		Natural'Output(Sacces, Taille);
-		Tableau_Ascii'Output(Sacces,Frequences) ;
-		Open(Entree, In_File, Fichier_Entree);
+		--On code l'arbre dans Reste
+                Reste := null;
+                Encryptage_Arbre(Arbre_Huffman,Reste);
+                -- On stocke d'abord la taille du code de l'arbre
+                Natural'Output(Sacces, (Reste.all'last-Reste.all'first+1));
+                Open(Entree, In_File, Fichier_Entree);
 		EAcces := Stream(Entree);
-		Reste := null;
-		while (not End_Of_File(Entree)) or Reste /= null loop
-			Recuperation_Caractere(Reste, Entree, EAcces, Caractere_Sortie, D);
+                --On écrit Reste au début du fichier
+                J := Reste.all'first;
+                while (Reste.all'last-J+1) > 7 loop
+		for i in 0..7 loop
+                        Val := 2*Val + Reste(J+i);
+                end loop;
+                Caractere_Sortie := Character'Val(Val);
+                Character'Output(SAcces, Caractere_Sortie);
+                Val := 0;
+                J := J+8;
+                end loop;
+                ResteB := new TabBits(1..Reste.all'last-J+1);
+                for i in ResteB.all'range loop
+                        ResteB(i) := Reste.all(J);
+                        J := J+1;
+                end loop;
+                Liberer(Reste);
+                Reste := ResteB;
+                ResteB := null;
+                --Coder les caractères du fichier
+                while (not End_Of_File(Entree)) or Reste /= null loop
+			Recuperation_Caractere(Reste, Entree, EAcces, Caractere_Sortie, D); --Reste peut être de taille quelconque
 			Character'Output(SAcces, Caractere_Sortie);
 		end loop;
 		Close(Entree);
@@ -154,7 +185,7 @@ procedure Huffman is
 
 	procedure Decompression(Fichier_Entree: String; Fichier_Sortie: String) is
 		Arbre_Huffman: Arbre;
-		Taille, Octets_Ecrits: Natural;
+		Taille, Octets_Ecrits, Taille_Code_Arbre: Natural;
 		Caractere: Character;
 		Entree, Sortie: Ada.Streams.Stream_IO.File_Type;
 		Reste : Code;
@@ -164,17 +195,23 @@ procedure Huffman is
 		begin
 			return Character'Input(EAcces);
 		end;
-
+                procedure DecryptArbre is new Decryptage_Arbre(Lecture_Octet_Compresse);
 		procedure Caractere_Suivant is new Decodage_Code(Lecture_Octet_Compresse);
 
 	begin
 		Open(Entree, In_File, Fichier_Entree);
 		EAcces := Stream( Entree );
 		Taille := Natural'Input(EAcces);
-		Arbre_Huffman := Calcul_Arbre(Tableau_Ascii'Input(EAcces)) ;
-		Create(Sortie, Out_File, Fichier_Sortie);
-		SAcces := Stream (Sortie);
+                Taille_Code_Arbre := Natural'Input(EAcces);
 		Reste := null;
+                Reste := new TabBits(1..(1+Taille_Code_Arbre/8)*8);
+                --Chargement de l'arbre
+                DecryptArbre(Reste,Arbre_Huffman);
+                
+		--Création du fichier de sortie
+                Create(Sortie, Out_File, Fichier_Sortie);
+		SAcces := Stream (Sortie);
+                --Ecriture du fichier
 		Octets_Ecrits := 0;
 		while(Octets_Ecrits < Taille) loop
 			Caractere_Suivant(Reste, Arbre_Huffman, Caractere);

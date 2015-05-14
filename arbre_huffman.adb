@@ -38,12 +38,14 @@ package body Arbre_Huffman is
 
 	procedure Affiche_Arbre(A: Arbre; H: in Integer) is
         begin
-                if A.EstFeuille then
+               
+		if A.EstFeuille then
                 --On se réduit aux lettres de l'alphabet courant pour plus de lisibilité
                 if (A.Char in 'a'..'z' or A.Char in 'A'..'Z') then
                 Put(A.Char);
                 --On affiche la longueur du code qui code chaque caractère
-                Put("Profondeur:");
+                New_Line;
+		Put("Profondeur:");
                 Put(H);
                 Put(" ");
                 end if;
@@ -194,11 +196,126 @@ package body Arbre_Huffman is
 	end;
 
         procedure Put(C:in Code) is
-        A: Integer:=0;
-        begin
+        A: Integer := 0;
+        begin   
+        Put(C.all'last-C.all'first+1);
                 for i in C.all'first..C.all'last loop
                         A:=A*10+C.all(i); 
                 end loop;
                 Put(A);
+        end;
+
+
+
+        procedure Encryptage_Arbre(A: in Arbre; C: out Code) is
+        
+        procedure Ajout_Char(K:in Character; C: in out Liste_ChiffreBinaire) is 
+        A : Integer := Character'Pos(K);
+        L : Liste_ChiffreBinaire := Liste_Vide;
+        begin
+                for i in 1..8 loop
+                        Insertion_Queue((A mod 2),L); 
+                        A := A/2;
+                end loop;
+                While not Est_Vide(L) loop
+                        Supprime_Queue(A,L);
+                        Insertion_Queue(A,C);
+                end loop;
+        end;
+        
+        procedure Encryptagebis(A: in Arbre; C: in out Liste_ChiffreBinaire) is
+                begin
+                if A.EstFeuille then
+                        Insertion_Queue(1,C);
+                        Ajout_Char(A.Char,C);
+                else
+                        Insertion_Queue(0,C);
+                        Encryptagebis(A.Fils(0),C);
+                        Encryptagebis(A.Fils(1),C);
+                end if;
+                end Encryptagebis;
+        L: Liste_ChiffreBinaire := Liste_Vide;
+        T:ChiffreBinaire;
+
+
+        begin
+           Encryptagebis(A,L);
+           C := new TabBits(1..Taille(L));
+           for i in C.all'range loop
+                Supprime_Tete(T,L);
+                C.all(i) := T;
+           end loop;
+        end;
+
+        procedure Decryptage_Arbre(Reste: in out Code; A: out Arbre) is
+
+        -- Procedure auxiliaire recursive
+	procedure DecryptBis(ResteB: in out Liste_ChiffreBinaire; A: in out Arbre) is
+        
+        Fils: TabFils := (others => null);
+        T: ChiffreBinaire;
+        K: Character;
+        Val_Char: Integer := 0;
+        begin
+
+        Supprime_Tete(T,ResteB);
+	
+        if (T=1) then
+		--On ajoute une feuille à l'arbre
+      		-- on met le caractère dans K
+		Val_Char := 0;
+                for i in 1..8 loop
+                      Supprime_Tete(T,ResteB);
+                      Val_Char := 2*Val_Char + T;
+                end loop;
+                K := Character'Val(Val_Char);
+		--On crée la feuille associé
+                A := new Noeud'(True,K);
+        else
+		--Si ce n'est pas une feuille, on crée un noeud, et recommence
+                A := new Noeud'(False, Fils);
+                DecryptBis(ResteB,A.Fils(0));
+                DecryptBis(ResteB,A.Fils(1));
+        end if;
+        
+        end;
+	
+	ResteB : Liste_ChiffreBinaire := Liste_Vide;
+        Tmp,R : Integer;
+        Caractere : Character;
+        T: ChiffreBinaire;
+	K: Integer := 0;
+	--Programme principal
+        begin
+         	
+		--chargement du code de l'arbre
+		for i in 1..Reste.all'last/8 loop
+			
+			Caractere := Octet_Suivant;
+			Tmp := Character'Pos(Caractere);
+			for j in 1..8 loop
+				R := Tmp mod 2;
+				Reste.all(i*8-j+1) := R;
+				Tmp := Tmp / 2;
+			end loop;
+			
+		end loop;
+		
+		--On traduit Reste en Liste_ChiffreBinaire
+		for i in Reste.all'range loop
+			Insertion_Queue(Reste.all(i),ResteB);
+		end loop;
+		Liberer(Reste);
+		
+		-- On Construit l'arbre
+                DecryptBis(ResteB,A);
+		
+		--On stocke le reste des bits non utilisés dans Reste
+                Reste := new TabBits(1..(Taille(ResteB)));
+                
+                for i in Reste.all'first..Reste.all'last loop
+                        Supprime_Tete(T,ResteB);
+                        Reste.all(i) := T;
+                end loop;
         end;
 end;

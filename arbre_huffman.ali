@@ -1,0 +1,221 @@
+V "GNAT Lib v4.6"
+P SS ZX
+R nnnvnvnnnnvnnnnnnnvnnvnnnvvnnvnvnnnnnvnnnnnnvnnnnnnnnnnvnnvnnnnvnnnnnnnnnnnnnnnn
+
+U arbre_huffman%b	arbre_huffman.adb	861f18a6 OO PK
+W ada%s			ada.ads			ada.ali
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.finalization.list_controller%s  a-filico.adb  a-filico.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W comparaisons%s	comparaisons.adb	comparaisons.ali
+W file_priorite%s	file_priorite.adb	file_priorite.ali  AD
+W interfaces%s		interfac.ads		interfac.ali
+W liste%s		liste.adb		liste.ali  AD
+W system%s		system.ads		system.ali
+W system.exception_table%s  s-exctab.adb	s-exctab.ali
+W system.finalization_implementation%s  s-finimp.adb  s-finimp.ali
+W system.finalization_root%s  s-finroo.adb	s-finroo.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+W system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+U arbre_huffman%s	arbre_huffman.ads	b5c6fb21 BN EE OO PK
+W ada%s			ada.ads			ada.ali
+W ada.finalization.list_controller%s  a-filico.adb  a-filico.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+W ada.unchecked_deallocation%s
+W liste%s		liste.adb		liste.ali
+W system.finalization_implementation%s  s-finimp.adb  s-finimp.ali
+W system.finalization_root%s  s-finroo.adb	s-finroo.ali
+
+D ada.ads		20070406091342 3ffc8e18
+D a-except.ads		20090727140100 0c711ac9
+D a-finali.ads		20090409150019 e5e85fa4
+D a-filico.ads		20090409150019 872dc219
+D a-inteio.ads		20070406091342 f64b89a4
+D a-ioexce.ads		20091130110856 8b9de6cd
+D a-stream.ads		20090409150019 2ca4ee37
+D a-tags.ads		20101021101406 c7695348
+D a-textio.ads		20091028140912 386df5d4
+D a-tiinio.ads		20090409150019 aa04e5d6
+D a-unccon.ads		20070406091342 f9eb8f06
+D a-uncdea.ads		20070406091342 f15a5ed1
+D arbre_huffman.ads	20150514133408 382e5d30
+D arbre_huffman.adb	20150514173603 690ddc93
+D comparaisons.ads	20150420170520 e78129b2
+D file_priorite.ads	20150509231238 fe9bccc7
+D file_priorite.adb	20150513190600 63b9bdc5
+D interfac.ads		20090409150019 f77d8799
+D i-cstrea.ads		20100622165701 1bd72c32
+D liste.ads		20150513210430 8af97164
+D liste.adb		20150513233128 a0c07a43
+D system.ads		20140416172229 23e1f70b
+D s-crtl.ads		20100617122610 ac77b159
+D s-exctab.ads		20090417131547 66e51330
+D s-ficobl.ads		20100909103250 443b9d66
+D s-finimp.ads		20090409150019 46853fe8
+D s-finroo.ads		20090409150019 dbb860c9
+D s-parame.ads		20091130110856 9c5d83fa
+D s-secsta.ads		20090707124243 eea35a36
+D s-soflin.ads		20090729085153 9414c974
+D s-stache.ads		20090417130712 596fc1b4
+D s-stalib.ads		20101021102512 c4241c00
+D s-stoele.ads		20090417130712 facd7d98
+D s-stoele.adb		20100617152355 afc5dc80
+D s-stratt.ads		20100909123135 aedef97e
+D s-traent.ads		20090417130712 5221ee41
+D s-unstyp.ads		20090409150019 6ae15c76
+D s-wchcon.ads		20090417130712 bfeb2e3d
+X 1 ada.ads
+16K9*Ada 19e8 13|1r6 2r6 3r5 23r34 14|1r6 2r5 3r6
+X 5 a-inteio.ads
+18K13*Integer_Text_IO[10|45] 13|2w10 3r9 14|3w10
+X 9 a-textio.ads
+49K13*Text_IO 472e16 14|1w10 2r9
+167U14*New_Line 14|47s17
+209U14*Put 14|45s17
+243U14*Put 14|48s17 50s17
+X 10 a-tiinio.ads
+65U14*Put 14|36s9[5|18] 49s17[5|18] 201s9[5|18] 205s17[5|18]
+X 12 a-uncdea.ads
+20u15*Unchecked_Deallocation 13|1w10 23r38
+X 13 arbre_huffman.ads
+6K9*Arbre_Huffman 50e4 14|5b14 321t4
+11A14*Tableau_Ascii(natural)<character> 17r47 14|60r47
+13I17*ChiffreBinaire{integer} 21r53 29r43 14|12r59 16r31 33r44 117r20 158r19
+. 238r11 256r12 286r12
+15P14*Arbre(48R14) 17r69 18r36 28r42 31r42 41r41 45r71 49c14 14|8r64 16r50
+. 39r36 60r69 61r21 70r28 81r23 83r20 109r42 116r43 152r33 155r37 210r42
+. 226r39 250r63 253r77
+17V18*Calcul_Arbre{15P14} 17>31 14|60b18 107l13 107t25
+17a31 Frequences{11A14} 14|60b31 64r50 68r26 68r44 73r40
+18U19*Affiche_Arbre 18>33 18>43 14|39b19 54s17 55s17 57l13 57t26
+18p33 A{15P14} 14|39b33 42r20 44r21 44r43 45r21 54r31 55r31
+18i43 H{integer} 14|39b43 49r21 54r41 55r41
+21A14*TabBits(13I17)<integer> 22r29 23r61 14|132r39 190r30 243r21 314r30
+22P14*Code(21A14) 23r70 26r42 30r29 31r56 40r56 45r58 14|132r27 151r48 198r28
+. 210r56 250r50
+23U19*Liberer[12|20] 14|167s17 308s17
+26A14*Dico(22P14)<character> 28r56 14|109r56 110r21 116r90
+28V18*Calcul_Dictionnaire{26A14} 28>38 14|109b18 149t12
+28p38 A{15P14} 14|109b38 147r27
+29U19*Put_ChiffreBinaire 29>38 14|12r80 33b19 37t12
+29i38 C{13I17} 14|33b38 36r13
+30U19*Put 30>23 14|198b19 206t12
+30p23 C{22P14} 14|198b23 201r13 201r24 202r26 202r39 203r33
+31U19*Encryptage_Arbre 31>36 31<49 14|210b19 248t12
+31p36 A{15P14} 14|210b36 242r26
+31p49 C{22P14} 14|210b49 243m12 244r21 246r17
+34V31 Octet_Suivant{character} 14|174s46
+40u27*Decodage_Code 40=41 41>25 42<25 14|151b19 196t12
+40p41 Reste{22P14} 14|151b33 161r20 163r26 163r43 164r41 167m25 190m17 191r26
+. 191r43 193r25
+41p25 Arbre_Huffman{15P14} 14|152b17 170r38
+42e25 Caractere{character} 14|153b17 174m33 175r54 188m17
+44V31 Octet_Suivant{character} 14|294s38
+45u27*Decryptage_Arbre 45=44 45<64 14|250b19 320t12
+45p44 Reste{22P14} 14|250b36 292r29 298r33 305r26 306r41 308m25 314m17 316r26
+. 316r43 318r25
+45p64 A{15P14} 14|250b56 311m35
+48R14 Noeud 49r30 14|18c14 18d20 25e19 70r41 97r32 273r26 276r26
+X 14 arbre_huffman.adb
+8K17 Ma_File[16|11] 9r13 64r22
+12K17 Package_Liste_ChiffreBinaire[20|6] 13r13 14r42
+14P14 Liste_ChiffreBinaire<20|10P6[12]> 111r21 116r59 133r30 156r25 212r56
+. 214r13 226r56 237r12 253r45 283r18
+16A14 TabFils(13|15P14)<integer> 22r39 82r23 255r15
+18b20*EstFeuille{boolean} 19r22 42r22 119r26 171r45 228r22
+20e38*Char{character} 44r23 44r45 45r23 72m27 140r29 188r48 230r38
+22a33*Fils{16A14} 54r33 55r33 123r36 127r36 183r64 233r41 234r41 277m37 278m37
+61p17 A{13|15P14} 102m17 106r24
+62i17 P1{natural} 86m31 99r37
+62i20 P2{natural} 89m31 99r40
+63b17 Non_Vide{boolean} 79r24 86m37 89m37 91r20
+64p17 File{16|13P9[8]} 73m35 86r26 87m29 89r26 93m34 99m32
+68e21 i{character} 72r33 73r51
+70p25 B{13|15P14} 72r25 73r54
+81p17 A1{13|15P14} 86m34 95r32 102r20
+81p20 A2{13|15P14} 89m34 96r32
+82a17 Filsb{16A14} 95m22 96m22 97r45
+83p17 A3{13|15P14} 97m22 99r43
+110a17 D{13|26A14} 147m31 148r24
+111p17 L{14P14} 147m29
+116U27 calculbis 116b27 116>37 116=49 116=80 123s24 127s24 143l21 143t30
+. 147s17
+116p37 A{13|15P14} 119r24 123r34 127r34 140r27
+116p49 L{14P14} 122m42 123m44 124m41 126m42 127m44 128m41 132r57 133r54 135r44
+116a80 D{13|26A14} 123m46 127m46 140m25
+117i17 e{13|13I17} 124m39 128m39
+132p25 C{13|22P14} 136r33 140r38
+133p25 Lbis{14P14} 136r51 137m33 137r47
+135i29 i{integer} 136r39
+155p17 Position_Courante{13|15P14} 170m17 171r27 183m25 183r46 188r30
+156p17 ResteB{14P14} 164m54 172r37 178m58 183r76 185m41 190r48 192m41
+157i17 Tmp{natural} 175m33 177r46 179m41 179r48
+157i21 R{natural} 177m41 178r56
+158i17 T{13|13I17} 185m39 192m39 193r41
+163i21 i{integer} 164r51
+176i37 I{integer}
+191i21 i{integer} 193r35
+199i9 A{integer} 203m25 203r28 205r21
+202i21 i{integer} 203r39
+212U19 Ajout_Char 212b19 212>30 212=46 224t12 230s25
+212e30 K{character} 213r38
+212p46 C{14P14} 222m43
+213i9 A{integer} 217r42 218m25 218r30 221m40 222r41
+214p9 L{14P14} 217m51 220r36 221m42
+216i21 i{integer}
+226U19 Encryptagebis 226b19 226>33 226=46 233s25 234s25 236l21 236t34 242s12
+226p33 A{13|15P14} 228r20 230r36 233r39 234r39
+226p46 C{14P14} 229m43 230m43 232m43 233m49 234m49
+237p9 L{14P14} 242m28 243r39 245m33
+238i9 T{13|13I17} 245m31 246r29
+244i16 i{integer} 246r23
+253U19 DecryptBis 253b19 253=30 253=67 277s17 278s17 281t12 311s17
+253p30 ResteB{14P14} 261m25 268m39 277m28 278m28
+253p67 A{13|15P14} 273m17 276m17 277m35 278m35
+255a9 Fils{16A14} 276r40
+256i9 T{13|13I17} 261m23 263r13 268m37 269r48
+257e9 K{character} 271m17 273r38
+258i9 Val_Char{integer} 266m17 269m23 269r37 271r36
+267i21 i{integer}
+283p9 ResteB{14P14} 306m54 311m28 314r49 317m41
+284i9 Tmp{integer} 295m25 297r38 299m33 299r40
+284i13 R{integer} 297m33 298r55
+285e9 Caractere{character} 294m25 295r46
+286i9 T{13|13I17} 317m39 318r41
+287i9 K{integer}
+292i21 i{integer} 298r43
+296i29 j{integer} 298r47
+305i21 i{integer} 306r51
+316i21 i{integer} 318r35
+X 15 comparaisons.ads
+3K9*Comparaisons 14|1w19 2r18 15|16e17
+7V13*Compare{5E9} 14|8r55
+X 16 file_priorite.ads
+11k9*File_Priorite 14|1w33 8r32 16|32e4
+13P9*File(30R9[14|8]) 14|64r30[8]
+16V13*Nouvelle_File{13P9[14|8]} 14|64s36[8]
+20U14*Insertion 14|73s25[8] 99s22[8]
+25U14*Meilleur 14|86s17[8] 89s17[8]
+27U14*Suppression 14|87s17[8] 93s22[8]
+30R9 File_Interne
+X 20 liste.ads
+6k9*Liste 13|4w6 14|12r53 20|39e10
+8R6*Cellule
+9P6*Pointeur(8R6[14|12])
+10P6*Liste<9P6[14|12]> 14|14r71[12]
+18U11*Insertion_Tete 14|178s41[12]
+19U11*Insertion_Queue 14|122s24[12] 126s24[12] 164s25[12] 217s25[12] 222s25[12]
+. 229s25[12] 232s25[12] 306s25[12]
+21U11*Supprime_Tete 14|185s25[12] 192s25[12] 245s17[12] 261s9[12] 268s23[12]
+. 317s25[12]
+23U11*Supprime_Queue 14|124s24[12] 128s24[12] 221s25[12]
+26V10*Suivant{10P6[14|12]} 14|137s39[12]
+27V10*Valeur{integer} 14|136s44[12] 183s69[12]
+31V10*Taille{natural} 14|132s50[12] 135s37[12] 190s41[12] 243s32[12] 314s42[12]
+32V10*Est_Vide{boolean} 14|172s28[12] 220s27[12]
+35V10*Liste_Vide{10P6[14|12]} 14|111s45[12] 156s49[12] 214s37[12] 237s36[12]
+. 283s42[12]
+

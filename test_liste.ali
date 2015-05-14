@@ -1,0 +1,78 @@
+V "GNAT Lib v4.6"
+M P W=b
+P SS ZX
+R nnnvnnnnnnnnnnnnnnvnnvnnnvvnnnnvnnnnnvnnnnnnvnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnnnnnn
+
+U test_liste%b		test_liste.adb		cf585761 NE OO SU IL
+W ada%s			ada.ads			ada.ali
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W liste%s		liste.adb		liste.ali
+W system%s		system.ads		system.ali
+W system.exception_table%s  s-exctab.adb	s-exctab.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+W system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+D ada.ads		20070406091342 3ffc8e18
+D a-except.ads		20090727140100 0c711ac9
+D a-finali.ads		20090409150019 e5e85fa4
+D a-filico.ads		20090409150019 872dc219
+D a-inteio.ads		20070406091342 f64b89a4
+D a-ioexce.ads		20091130110856 8b9de6cd
+D a-stream.ads		20090409150019 2ca4ee37
+D a-tags.ads		20101021101406 c7695348
+D a-textio.ads		20091028140912 386df5d4
+D a-tiinio.ads		20090409150019 aa04e5d6
+D a-unccon.ads		20070406091342 f9eb8f06
+D interfac.ads		20090409150019 f77d8799
+D i-cstrea.ads		20100622165701 1bd72c32
+D liste.ads		20150513210430 8af97164
+D liste.adb		20150513203205 26fe80d3
+D system.ads		20140416172229 23e1f70b
+D s-crtl.ads		20100617122610 ac77b159
+D s-exctab.ads		20090417131547 66e51330
+D s-ficobl.ads		20100909103250 443b9d66
+D s-finimp.ads		20090409150019 46853fe8
+D s-finroo.ads		20090409150019 dbb860c9
+D s-parame.ads		20091130110856 9c5d83fa
+D s-secsta.ads		20090707124243 eea35a36
+D s-soflin.ads		20090729085153 9414c974
+D s-stache.ads		20090417130712 596fc1b4
+D s-stalib.ads		20101021102512 c4241c00
+D s-stoele.ads		20090417130712 facd7d98
+D s-stoele.adb		20100617152355 afc5dc80
+D s-stratt.ads		20100909123135 aedef97e
+D s-traent.ads		20090417130712 5221ee41
+D s-unstyp.ads		20090409150019 6ae15c76
+D s-wchcon.ads		20090417130712 bfeb2e3d
+D test_liste.adb	20150513214217 8b875a75
+X 1 ada.ads
+16K9*Ada 19e8 33|2r6 2r26 3r5 3r25
+X 5 a-inteio.ads
+18K13*Integer_Text_IO[10|45] 33|2w10 3r9
+X 9 a-textio.ads
+49K13*Text_IO 472e16 33|2w30 3r29
+167U14*New_Line 33|23s1
+X 10 a-tiinio.ads
+65U14*Put 33|8s1[5|18] 26s1[5|18]
+X 14 liste.ads
+6k9*Liste 39e10 33|1w6 11r38
+8R6 Cellule
+9P6 Pointeur(8R6[33|11])
+10P6 Liste<9P6[33|11]> 33|12r49[11]
+18U11 Insertion_Tete 33|18s1[11] 19s1[11] 20s1[11]
+19U11 Insertion_Queue 33|21s1[11]
+23U11 Supprime_Queue 33|24s1[11]
+31V10 Taille{natural} 33|26s5[11]
+33U11 Put 33|22s1[11] 25s1[11]
+X 33 test_liste.adb
+5U11*test_liste 5b11 27t4
+6U11 Pute 6b11 6>16 9l5 9t9 11r56
+6i16 A{integer} 8r5
+11K9 Package_Liste_Integer[14|6] 12r27 13r5
+12P6 Liste_Integer<14|10P6[11]> 14r4
+14p1 L{12P6} 18m18 19m18 20m18 21m19 22r5 24m18 25r5 26r12
+15i1 X{integer} 24m16
+

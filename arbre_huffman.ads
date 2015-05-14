@@ -28,6 +28,8 @@ package Arbre_Huffman is
 	function Calcul_Dictionnaire(A : Arbre) return Dico;
         procedure Put_ChiffreBinaire(C:in ChiffreBinaire);
 	procedure Put(C: in Code); 
+        procedure Encryptage_Arbre(A: in Arbre; C: out Code);
+
         generic
 		with function Octet_Suivant return Character;
 		--decodage_code prend un reste d'octet non decode
@@ -38,6 +40,9 @@ package Arbre_Huffman is
 		procedure Decodage_Code(Reste : in out Code;
 			Arbre_Huffman : Arbre;
 			Caractere : out Character);
+        generic
+                with function Octet_Suivant return Character;
+                procedure Decryptage_Arbre(Reste: in out Code; A: out Arbre); 
 
 private
 	type Noeud;

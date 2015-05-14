@@ -1,0 +1,37 @@
+V "GNAT Lib v4.6"
+A -g
+P ZX
+R nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnn
+
+U comparaisons%b	comparaisons.adb	8972894c OO PK
+
+U comparaisons%s	comparaisons.ads	e78129b2 EE NE OO PK
+
+D comparaisons.ads	20150420170520 e78129b2
+D comparaisons.adb	20150420170520 6ef3a0fe
+D system.ads		20140416172229 23e1f70b
+X 1 comparaisons.ads
+3K9*Comparaisons 16l5 16e17 2|1b14 61l5 61t17
+5E9*Comparaison 5e39 7r42 10r44 13r43 2|5r39 7r39 19r41 22r43 24r43
+5n25*EQ{5E9} 2|10r17 31r20 48r23
+5n29*INF{5E9} 2|12r17 33r20 45r20 50r23
+5n34*SUP{5E9} 2|14r17 36r17 43r20 53r20
+7V13*Compare{5E9} 7>21 7>23 2|19b13
+7i21 X{integer} 2|19b21
+7i23 Y{integer} 2|19b23
+10V13*Compare{5E9} 10>21 10>23 2|22b13
+10e21 X{character} 2|22b21
+10e23 Y{character} 2|22b23
+13V13*Compare{5E9} 13>21 13>24 2|24b13 59t8
+13s21 S1{string} 2|24b21 27r11 29r15 42r13 44r16 46r19
+13s24 S2{string} 2|24b24 28r11 30r18 35r18 42r22 44r25 47r19 52r19
+X 2 comparaisons.adb
+4E12 T 5r29 7r29
+5v13 GenCompare 5>24 5>26 7b13 16t8 18r31 21r32
+5*24 X{4E12} 7b24 9r10 11r13
+5*26 Y{4E12} 7b26 9r12 11r15
+18V13 IntCompare[5]{1|5E9} 7b13 19r61
+21V13 CharCompare[5]{1|5E9} 7b13 22r63
+25i7 I1{integer} 27m7 29r10 42r16 44r19 46r16 55m13 55r17
+25i10 I2{integer} 28m7 30r13 35r13 42r25 44r28 47r16 52r16 56m13 56r17
+
